@@ -1,0 +1,7 @@
+server must be stateless and have data stored outside of map in memory
+into a database
+
+pm2 is multiple instances of node
+
+node threads are not threads they share a pid   
+processors run each thread in parallel and happen inside one process 
