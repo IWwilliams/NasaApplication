@@ -97,10 +97,11 @@ async function saveLaunch(launch) {
 
 async function scheduleNewLaunch(launch) {
   const planet = await planets.findOne({ keplerName: launch.target });
-
+  console.log(planet);
   if (!planet) {
     throw new Error("No matching planet was found");
   }
+
   const newLaunch = {
     ...launch,
     flightNumber: 1 + (await getLatestFlightNumber()),
