@@ -12,9 +12,11 @@ jobs:
   build:
     env:
       CI: true # disables watch mode and buffering of jest output
+      MONGO_URL: mongodb://localhost/nasa
     strategy:
       matrix:
         node-version: [14.x, 16.x]
+        mongodb-version: ["4.4.6"]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3 #checkout latest version of code from master branch
@@ -26,5 +28,9 @@ jobs:
         run: npm install
       - name: Run Build
         run: npm run build --prefix client
+      - name: use Mongo DB From GitHub Actions
+        uses: supercharge/mongodb-github-action@v2.0.0
+        with:
+          mongodb-version: ${{matrix.mongodb-version}}
       - name: Run Tests
         run: npm run test
